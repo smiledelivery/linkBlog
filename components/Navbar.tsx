@@ -7,7 +7,7 @@ import { Button } from './ui/button'
 
 const Navbar = () => {
     return (
-        <div className='fixed w-full bg-white z-50'>
+        <div className='fixed w-full bg-white z-50 shadow-lg'>
             <div className='flex items-center justify-between max-w-6xl h-14 mx-auto px-3'>
                 <div className='flex items-center gap-2'>
                     <Image
