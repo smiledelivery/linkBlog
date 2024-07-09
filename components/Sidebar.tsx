@@ -5,13 +5,13 @@ import { currentUser } from '@clerk/nextjs/server'
 
 
 const Sidebar = async ({ user }: { user: any }) => {
-  const User = await currentUser()
+  // const User = await currentUser()
   return (
     <div className='hidden md:block w-[20%] h-fit border border-gray-400 bg-white rounded-lg'>
       <div className='flex flex-col items-center relative '>
         <div className='w-full h-16 overflow-hidden'>
           {
-            User && (
+            user && (
               <Image
                 src={'/banner.jpg'}
                 alt='banner'
@@ -24,11 +24,11 @@ const Sidebar = async ({ user }: { user: any }) => {
         </div>
         <div className='my-1 absolute top-11 left-[40%]'>
           <ProfilePhoto
-            src={User ? User?.imageUrl! : '/banner.jpg'} />
+            src={user ? user?.imageUrl! : '/banner.jpg'} />
         </div>
         <div className='mt-8 mb-4'>
-          <h1 className='font-bold hover:underline cursor-pointer'>{User ? `${User?.firstName} ${User?.lastName}` : 'smile plz'}</h1>
-          <p className='text-xs'>@{User ? `${User?.lastName}` : 'username'}</p>
+          <h1 className='font-bold hover:underline cursor-pointer'>{user ? `${user?.firstName} ${user?.lastName}` : 'smile plz'}</h1>
+          <p className='text-xs'>@{user ? `${user?.lastName}` : 'username'}</p>
         </div>
       </div>
       <div className='text-xs'>

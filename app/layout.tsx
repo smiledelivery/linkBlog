@@ -21,7 +21,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${inter.className} flex flex-col`}>
           <Navbar />
-          <div className="bg-gray-400 flex-1 w-full">
+          <div className="bg-gray-400 flex-1 h-screen w-full">
             <main className="max-w-6xl mx-auto">
               {children}
             </main>
