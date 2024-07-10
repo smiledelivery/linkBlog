@@ -55,3 +55,70 @@ export const createPostAction = async (
     throw new Error("error");
   }
 };
+
+export const getAllPosts = async () => {
+  try {
+    await connectDB();
+    const posts = await Post.find()
+      .sort({ createdAt: -1 })
+      .populate({ path: "comments", options: { sort: { createdAt: -1 } } });
+    if (!posts) return [];
+    return JSON.parse(JSON.stringify(posts));
+  } catch (error) {
+    console.log("serverAction page get all post problem::", error);
+  }
+};
+
+export const deletePostAction = async (postId: string) => {
+  await connectDB();
+  const user = await currentUser();
+  if (!user) throw new Error("User not authenticated");
+  const post = await Post.findById(postId);
+  if (!post) throw new Error("Post not found");
+
+  if (post.user.userId === user.id) {
+    throw new Error("You are not an owner of this Post");
+  }
+
+  try {
+    await Post.deleteOne({ _id: postId });
+    revalidatePath("/");
+  } catch (error) {
+    throw new Error("An error occurred ");
+  }
+};
+
+export const creteCommentAction = async (
+  postId: string,
+  formData: FormData
+) => {
+  try {
+    const user = await currentUser();
+    if (!user) throw new Error("User not authenticated");
+
+    const inputText = formData.get("inputText") as string;
+
+    if (!inputText) throw new Error("Input field is required");
+
+    if (!postId) throw new Error("Post is required");
+    const userDatabase: IUser = {
+      firstName: user.firstName || "first Name",
+      lastName: user.lastName || "last Name",
+      userId: user.id,
+      profilePhoto: user.imageUrl,
+    };
+    const post = await Post.findById({ _id: postId });
+    if (!post) throw new Error("Post not found");
+
+    const comment = await Comment.create({
+      textMessage: inputText,
+      user: userDatabase,
+    });
+
+    post.comments?.push(comment);
+    await post.save();
+    revalidatePath("/");
+  } catch (error) {
+    throw new Error("An error occurred");
+  }
+};
