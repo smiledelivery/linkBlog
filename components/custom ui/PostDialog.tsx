@@ -8,7 +8,6 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog"
 import ProfilePhoto from "../shared/ProfilePhoto"
-import { currentUser } from "@clerk/nextjs/server"
 import { Textarea } from "../ui/textarea"
 import { Images } from "lucide-react"
 import React, { useRef, useState } from "react"
@@ -44,8 +43,6 @@ const PostDialog = async ({ setOpen, open, src }: { setOpen: any, open: boolean,
         setInputText('')
         setOpen(false)
     }
-
-    const User = await currentUser()
     return (
         <Dialog open={open}>
             <DialogContent onInteractOutside={() => setOpen(false)} className="sm:max-w-[425px]">
@@ -54,7 +51,7 @@ const PostDialog = async ({ setOpen, open, src }: { setOpen: any, open: boolean,
                         <ProfilePhoto src={src} />
                         <div>
                             <h1>
-                                {User ? `${User?.firstName} ${User?.lastName}` : 'smile plz'}
+                                smile smile
                             </h1>
                             <p className="text-xs">Post to anyone</p>
                         </div>
