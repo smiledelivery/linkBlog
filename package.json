@@ -14,17 +14,22 @@
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "buffer": "^6.0.3",
     "class-variance-authority": "^0.7.0",
     "cloudinary": "^2.2.0",
     "clsx": "^2.1.1",
+    "graceful-fs": "^4.2.11",
     "lucide-react": "^0.402.0",
     "mongoose": "^8.5.0",
     "next": "14.2.4",
     "next-cloudinary": "^6.6.2",
     "react": "^18",
     "react-dom": "^18",
+    "sonner": "^1.5.0",
+    "stream-browserify": "^3.0.0",
     "tailwind-merge": "^2.4.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "url": "^0.11.3"
   },
   "devDependencies": {
     "@types/node": "^20",
